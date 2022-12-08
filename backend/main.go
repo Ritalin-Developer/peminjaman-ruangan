@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/script-loader/config"
-	"github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/script-loader/model"
+	"github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/config"
+	"github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/model"
 	"github.com/getsentry/sentry-go"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
