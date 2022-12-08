@@ -1,0 +1,52 @@
+services:
+  mongodb:
+    container_name: mongodb
+    restart: always
+    image: mongo:4.2.0
+    volumes:
+      - ./mongodb:/data/db
+    networks:
+      - golang-mongo
+    ports:
+      - 27017:27017
+    expose:
+      - 27017
+
+  frontend:
+    container_name: frontend
+    image: frontend
+    build: ./frontend
+    restart: always
+    volumes:
+      - type: bind
+        source: ./frontend/nginx.conf
+        target: /etc/nginx/conf.d/default.conf
+        read_only: true
+    networks:
+      - golang-mongo
+    ports:
+      - 3081:80
+  
+  backend:
+    container_name: backend
+    restart: always
+    build:
+      context: backend
+      target: builder
+    volumes:
+      - ./backend:/usr/src/app
+    secrets:
+      - app.env
+    networks:
+      - golang-mongo
+    ports:
+      - 1118:1118
+    expose:
+      - 1118
+
+networks:
+  golang-mongo:
+
+secrets:
+  app.env:
+    file: backend/app.env
