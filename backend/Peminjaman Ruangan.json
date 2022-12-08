@@ -1,0 +1,28 @@
+{
+	"info": {
+		"_postman_id": "ec7c55ad-2d66-4197-8032-2249b0aa4413",
+		"name": "Peminjaman Ruangan",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "14530639-ec7c55ad-2d66-4197-8032-2249b0aa4413"
+	},
+	"item": [
+		{
+			"name": "API Gateway",
+			"id": "1f983bac-d842-4c6b-a63a-feb098ef1040",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}",
+					"host": [
+						"{{host}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
