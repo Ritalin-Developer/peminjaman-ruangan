@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/config"
+	user "github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/endpoint"
 	"github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/model"
 	"github.com/getsentry/sentry-go"
 	"github.com/gin-contrib/cors"
@@ -56,6 +57,9 @@ func main() {
 			Data:    nil,
 		})
 	})
+	r.POST("/user/register", user.Register)
+	r.POST("/user/login", user.Login)
+	r.GET("/user/token/validate", user.UserValidateToken)
 
 	port, _ := strconv.Atoi(config.Port)
 	log.Infof("Service version: %s", config.Version)
