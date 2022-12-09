@@ -7,6 +7,103 @@
 	},
 	"item": [
 		{
+			"name": "User",
+			"item": [
+				{
+					"name": "User Register",
+					"id": "886db215-7db2-470c-8cf4-73877e2f934c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"pritamisergio\",\n    \"password\":\"anonymous00\",\n    \"real_name\": \"Pritami Sergio\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/user/register",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Login",
+					"id": "adb5e492-f04e-484a-ac46-90f9c68b93a3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"ariebrainware\",\n    \"password\":\"anonymous00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/user/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate Token",
+					"id": "0d65b7cb-06b3-46a2-81d5-9a7be8e9159b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVfYXQiOjE2NzA4MDczNzEsImlzc3VlZF9hdCI6MTY3MDU5MTM3MSwiaXNzdWVyIjoicGVtaW5qYW1hbi1ydWFuZ2FuIiwicm9sZV9pZCI6Miwicm9sZV9uYW1lIjoidXNlciIsInVzZXJuYW1lIjoiYXJpZWJyYWlud2FyZSJ9.M45bVQDURIZCu42Tm69MhiyLv0F1WwdVXNkzQEujBUk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/user/token/validate",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"token",
+								"validate"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "1ea5bfbe-09c7-40e3-9f64-62cf4a14e162"
+		},
+		{
 			"name": "API Gateway",
 			"id": "1f983bac-d842-4c6b-a63a-feb098ef1040",
 			"protocolProfileBehavior": {
