@@ -46,6 +46,8 @@ func getModels() (models []interface{}) {
 	models = []interface{}{
 		model.User{},
 		model.Role{},
+		model.Submission{},
+		model.Room{},
 	}
 	return
 }

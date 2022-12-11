@@ -34,7 +34,7 @@ func Register(c *gin.Context) {
 	if err != nil {
 		log.Error(err)
 		sentry.CaptureException(err)
-		util.CallServerError(c, "server busy, please try again later", err)
+		util.CallServerError(c, "something wrong, please try again later", err)
 		return
 	}
 
@@ -101,7 +101,7 @@ func Login(c *gin.Context) {
 	if err != nil {
 		log.Error(err)
 		sentry.CaptureException(err)
-		util.CallServerError(c, "server busy, please try again later", err)
+		util.CallServerError(c, "something wrong, please try again later", err)
 		return
 	}
 
@@ -153,7 +153,7 @@ func Login(c *gin.Context) {
 	if err != nil {
 		log.Error(err)
 		sentry.CaptureException(err)
-		util.CallServerError(c, "server busy, please try again later", err)
+		util.CallServerError(c, "something wrong, please try again later", err)
 		return
 	}
 

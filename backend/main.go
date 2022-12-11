@@ -8,7 +8,8 @@ import (
 	"time"
 
 	"github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/config"
-	user "github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/endpoint"
+	"github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/endpoint"
+	"github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/middleware"
 	"github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/model"
 	"github.com/getsentry/sentry-go"
 	"github.com/gin-contrib/cors"
@@ -57,9 +58,26 @@ func main() {
 			Data:    nil,
 		})
 	})
-	r.POST("/user/register", user.Register)
-	r.POST("/user/login", user.Login)
-	r.GET("/user/token/validate", user.UserValidateToken)
+
+	user := r.Group("/user")
+	user.POST("/register", endpoint.Register)
+	user.POST("/login", endpoint.Login)
+	user.GET("/token/validate", endpoint.UserValidateToken)
+
+	userSubmission := user.Group("/submission")
+	userSubmission.Use(middleware.MiddlewareValidateToken)
+	userSubmission.POST("/create", endpoint.SubmissionCreate)
+	userSubmission.GET("/list", endpoint.SubmissionList)
+
+	adminSubmission := r.Group("/admin/submission")
+	adminSubmission.Use(middleware.ValidateRoleAccess)
+	adminSubmission.POST("/approve", endpoint.SubmissionApprove)
+	adminSubmission.POST("/reject", endpoint.SubmissionReject)
+
+	adminRoom := r.Group("/admin/room")
+	adminRoom.Use(middleware.ValidateRoleAccess)
+	adminRoom.POST("/register", endpoint.RegisterRoom)
+	adminRoom.POST("/list", endpoint.ListRoom)
 
 	port, _ := strconv.Atoi(config.Port)
 	log.Infof("Service version: %s", config.Version)

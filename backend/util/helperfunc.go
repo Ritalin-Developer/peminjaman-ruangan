@@ -46,6 +46,17 @@ func CallServerError(c *gin.Context, msg string, err error) {
 	c.Next()
 }
 
+// MiddlewareCallServerError is for return API response server error
+func MiddlewareCallServerError(c *gin.Context, msg string, err error) {
+	c.JSON(http.StatusInternalServerError, gin.H{
+		"success": false,
+		"err":     err.Error(),
+		"msg":     msg,
+		"data":    map[string]interface{}{},
+	})
+	c.Abort()
+}
+
 // CallUserError is for return API response server error
 func CallUserError(c *gin.Context, msg string, err error) {
 	c.JSON(http.StatusBadRequest, gin.H{
@@ -77,6 +88,17 @@ func CallUserUnauthorized(c *gin.Context, msg string, err error) {
 		"data":    map[string]interface{}{},
 	})
 	c.Next()
+}
+
+// MiddlewareCallUserUnauthorized is for return API response server error
+func MiddlewareCallUserUnauthorized(c *gin.Context, msg string, err error) {
+	c.JSON(http.StatusUnauthorized, gin.H{
+		"success": false,
+		"err":     err.Error(),
+		"msg":     msg,
+		"data":    map[string]interface{}{},
+	})
+	c.Abort()
 }
 
 // CallSuccessOkWithLink is for return API response with status code 200, you need to specify msg, and data as function parameter
