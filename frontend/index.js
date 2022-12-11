@@ -1,9 +1,10 @@
-const BACKEND_URL = "https://peminjamanruangan.rtln.xyz"
+// const BACKEND_URL = "https://peminjamanruangan.rtln.xyz"
+const BACKEND_URL = "http://localhost:1118"
 
 const btnRegister = $("#btn-register")
-const txtUsername = $("#txt-username")
-const txtPassword = $("#txt-password")
-const txtRealName = $("#txt-realname")
+const txtUsername = $("#txt-username").val
+const txtPassword = $("#txt-password").val
+const txtRealName = $("#txt-realname").val
 
 // fetch(`${BACKEND_URL}/`)
 //   .then((Response) => Response.json())
