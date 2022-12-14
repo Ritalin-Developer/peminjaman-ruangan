@@ -59,6 +59,22 @@ func main() {
 		})
 	})
 
+	// Admin Endpoint
+	admin := r.Group("/admin")
+	admin.PUT("/info/update", adminEndpoint.AdminChangeInfo)
+
+	adminSubmission := admin.Group("/submission")
+	adminSubmission.Use(middleware.ValidateRoleAccess)
+	adminSubmission.GET("/list", adminEndpoint.SubmissionList)
+	adminSubmission.POST("/approve", adminEndpoint.SubmissionApprove)
+	adminSubmission.POST("/reject", adminEndpoint.SubmissionReject)
+
+	adminRoom := admin.Group("/room")
+	adminRoom.Use(middleware.ValidateRoleAccess)
+	adminRoom.POST("/register", adminEndpoint.RegisterRoom)
+	adminRoom.POST("/list", adminEndpoint.ListRoom)
+
+	// User Endpoint
 	user := r.Group("/user")
 	user.POST("/register", endpoint.Register)
 	user.POST("/login", endpoint.Login)
