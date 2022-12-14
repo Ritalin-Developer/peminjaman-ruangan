@@ -67,6 +67,7 @@ func main() {
 	admin.PUT("/info/update", adminEndpoint.AdminChangeInfo)
 
 	adminSubmission := admin.Group("/submission")
+	adminSubmission.Use(middleware.MiddlewareValidateToken)
 	adminSubmission.Use(middleware.ValidateRoleAccess)
 	adminSubmission.GET("/list", adminEndpoint.SubmissionList)
 	adminSubmission.POST("/approve", adminEndpoint.SubmissionApprove)

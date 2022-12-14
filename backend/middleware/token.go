@@ -5,6 +5,7 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/model"
 	"github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/util"
 	"github.com/getsentry/sentry-go"
 	"github.com/gin-gonic/gin"
@@ -45,16 +46,16 @@ func MiddlewareValidateToken(c *gin.Context) {
 		}
 		if exp < time.Now().Unix() {
 			err = fmt.Errorf("expired token")
-			util.CallUserUnauthorized(c, "something wrong with the token", err)
+			util.MiddlewareCallUserUnauthorized(c, "something wrong with the token", err)
 			c.Abort()
 		}
-		data := map[string]interface{}{
-			"username":  claims["username"],
-			"issuer":    claims["issuer"],
-			"role_id":   claims["role_id"],
-			"role_name": claims["role_name"],
+		data := &model.TokenUserData{
+			Username: claims["username"].(string),
+			Issuer:   claims["issuer"].(string),
+			RoleID:   claims["role_id"].(float64),
+			RoleName: claims["role_name"].(string),
 		}
-		c.Set("user", data)
+		c.Set("data", data)
 		c.Next()
 	} else {
 		err = fmt.Errorf("invalid token claims")
