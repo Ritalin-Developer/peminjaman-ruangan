@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/config"
+	"github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/endpoint"
 	adminEndpoint "github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/endpoint/admin"
 	userEndpoint "github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/endpoint/user"
 	"github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/middleware"
@@ -59,6 +60,7 @@ func main() {
 			Data:    nil,
 		})
 	})
+	r.POST("/login", endpoint.Login)
 
 	// Admin Endpoint
 	admin := r.Group("/admin")
@@ -78,7 +80,6 @@ func main() {
 	// User Endpoint
 	user := r.Group("/user")
 	user.POST("/register", userEndpoint.Register)
-	user.POST("/login", userEndpoint.Login)
 	user.PUT("/info/update", userEndpoint.UserChangeInfo)
 	user.GET("/token/validate", userEndpoint.UserValidateToken)
 
