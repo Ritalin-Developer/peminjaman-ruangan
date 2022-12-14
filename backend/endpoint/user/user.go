@@ -225,3 +225,7 @@ func UserValidateToken(c *gin.Context) {
 		"role_id":  tokenData["role_id"],
 	})
 }
+
+func UserChangeInfo(c *gin.Context) {
+	util.CallSuccessOK(c, "success", nil)
+}

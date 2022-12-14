@@ -88,10 +88,10 @@ func SubmissionCreate(c *gin.Context) {
 	util.CallSuccessOK(c, "success", nil)
 }
 
-func SubmissionApprove(c *gin.Context) {
+func SubmissionUpdate(c *gin.Context) {
 	util.CallSuccessOK(c, "success", nil)
 }
 
-func SubmissionReject(c *gin.Context) {
+func SubmissionDelete(c *gin.Context) {
 	util.CallSuccessOK(c, "success", nil)
 }

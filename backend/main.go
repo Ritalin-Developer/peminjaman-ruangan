@@ -8,7 +8,8 @@ import (
 	"time"
 
 	"github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/config"
-	"github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/endpoint"
+	adminEndpoint "github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/endpoint/admin"
+	userEndpoint "github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/endpoint/user"
 	"github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/middleware"
 	"github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/model"
 	"github.com/getsentry/sentry-go"
@@ -76,24 +77,21 @@ func main() {
 
 	// User Endpoint
 	user := r.Group("/user")
-	user.POST("/register", endpoint.Register)
-	user.POST("/login", endpoint.Login)
-	user.GET("/token/validate", endpoint.UserValidateToken)
+	user.POST("/register", userEndpoint.Register)
+	user.POST("/login", userEndpoint.Login)
+	user.PUT("/info/update", userEndpoint.UserChangeInfo)
+	user.GET("/token/validate", userEndpoint.UserValidateToken)
 
 	userSubmission := user.Group("/submission")
 	userSubmission.Use(middleware.MiddlewareValidateToken)
-	userSubmission.POST("/create", endpoint.SubmissionCreate)
-	userSubmission.GET("/list", endpoint.SubmissionList)
+	userSubmission.POST("/create", userEndpoint.SubmissionCreate)
+	userSubmission.PUT("/update", userEndpoint.SubmissionUpdate)
+	userSubmission.DELETE("/delete", userEndpoint.SubmissionDelete)
+	userSubmission.GET("/list", userEndpoint.SubmissionList)
 
-	adminSubmission := r.Group("/admin/submission")
-	adminSubmission.Use(middleware.ValidateRoleAccess)
-	adminSubmission.POST("/approve", endpoint.SubmissionApprove)
-	adminSubmission.POST("/reject", endpoint.SubmissionReject)
-
-	adminRoom := r.Group("/admin/room")
-	adminRoom.Use(middleware.ValidateRoleAccess)
-	adminRoom.POST("/register", endpoint.RegisterRoom)
-	adminRoom.POST("/list", endpoint.ListRoom)
+	userRoom := user.Group("/room")
+	userRoom.Use(middleware.MiddlewareValidateToken)
+	userRoom.GET("/list", userEndpoint.UserRoomList)
 
 	port, _ := strconv.Atoi(config.Port)
 	log.Infof("Service version: %s", config.Version)
