@@ -30,6 +30,7 @@ func Register(c *gin.Context) {
 		return
 	}
 	if request.Username == "" || request.Password == "" || request.RealName == "" {
+		err = fmt.Errorf("username, password, and real_name field cannot be empty")
 		log.Error(err)
 		util.CallUserError(c, "invalid request", err)
 		return
