@@ -103,6 +103,13 @@ func Login(c *gin.Context) {
 		return
 	}
 
+	if request.Username == "" || request.Password == "" {
+		err = fmt.Errorf("username and password field cannot be empty")
+		log.Error(err)
+		util.CallUserError(c, "invalid request", err)
+		return
+	}
+
 	db, err := external.GetPostgresClient()
 	if err != nil {
 		log.Error(err)
