@@ -1,6 +1,7 @@
 package endpoint
 
 import (
+	"fmt"
 	"strconv"
 
 	"github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/external"
@@ -35,7 +36,7 @@ func ListRoom(c *gin.Context) {
 type roomRequest struct {
 	RoomNumber  string `json:"room_number"`
 	Remark      string `json:"remark"`
-	IsAvailable bool   `json:"is_availabl"`
+	IsAvailable bool   `json:"is_available"`
 }
 
 func RegisterRoom(c *gin.Context) {
@@ -44,6 +45,13 @@ func RegisterRoom(c *gin.Context) {
 	if err != nil {
 		log.Error(err)
 		sentry.CaptureException(err)
+		util.CallUserError(c, "invalid request", err)
+		return
+	}
+
+	if request.RoomNumber == "" || request.Remark == "" {
+		err = fmt.Errorf("username and password field cannot be empty")
+		log.Error(err)
 		util.CallUserError(c, "invalid request", err)
 		return
 	}
@@ -58,7 +66,7 @@ func RegisterRoom(c *gin.Context) {
 	room := &model.Room{
 		RoomNumber:  request.RoomNumber,
 		Remark:      request.Remark,
-		IsAvailable: request.IsAvailable,
+		IsAvailable: request.IsAvailable || false,
 	}
 	err = db.
 		Create(&room).
