@@ -29,6 +29,11 @@ func Register(c *gin.Context) {
 		util.CallUserError(c, "invalid request", err)
 		return
 	}
+	if request.Username == "" || request.Password == "" || request.RealName == "" {
+		log.Error(err)
+		util.CallUserError(c, "invalid request", err)
+		return
+	}
 
 	db, err := external.GetPostgresClient()
 	if err != nil {
