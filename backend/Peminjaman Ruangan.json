@@ -10,6 +10,90 @@
 			"name": "User",
 			"item": [
 				{
+					"name": "Submission",
+					"item": [
+						{
+							"name": "User Create Submission",
+							"id": "910aee89-e96c-4765-ab2b-a383d6abed7d",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVfYXQiOjE2NzA4MDczNzEsImlzc3VlZF9hdCI6MTY3MDU5MTM3MSwiaXNzdWVyIjoicGVtaW5qYW1hbi1ydWFuZ2FuIiwicm9sZV9pZCI6Miwicm9sZV9uYW1lIjoidXNlciIsInVzZXJuYW1lIjoiYXJpZWJyYWlud2FyZSJ9.M45bVQDURIZCu42Tm69MhiyLv0F1WwdVXNkzQEujBUk",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"room_id\": 1,\n    \"room_number\": \"B303\",\n    \"remark\": \"Untuk acara MUBES Himpunan\",\n    \"start_use_date\": \"2023-01-05\",\n    \"end_use_date\": \"2023-01-06\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/user/submission/create",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"user",
+										"submission",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "User List Submission",
+							"id": "f7abaffb-defd-4291-aadc-fc573b54a2a1",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVfYXQiOjE2NzA4MDczNzEsImlzc3VlZF9hdCI6MTY3MDU5MTM3MSwiaXNzdWVyIjoicGVtaW5qYW1hbi1ydWFuZ2FuIiwicm9sZV9pZCI6Miwicm9sZV9uYW1lIjoidXNlciIsInVzZXJuYW1lIjoiYXJpZWJyYWlud2FyZSJ9.M45bVQDURIZCu42Tm69MhiyLv0F1WwdVXNkzQEujBUk",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/user/submission/list?is_approved=false",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"user",
+										"submission",
+										"list"
+									],
+									"query": [
+										{
+											"key": "is_approved",
+											"value": "false"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "dfeb1053-0bfc-4e25-9009-10acb0a7f814"
+				},
+				{
+					"name": "Room",
+					"item": [],
+					"id": "3aa5feb9-a062-4369-a6fc-7e18704782d5"
+				},
+				{
 					"name": "User Register",
 					"id": "886db215-7db2-470c-8cf4-73877e2f934c",
 					"protocolProfileBehavior": {
@@ -35,37 +119,6 @@
 							"path": [
 								"user",
 								"register"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "User Login",
-					"id": "adb5e492-f04e-484a-ac46-90f9c68b93a3",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"username\":\"ariebrainware\",\n    \"password\":\"anonymous00\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/user/login",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"user",
-								"login"
 							]
 						}
 					},
@@ -104,105 +157,66 @@
 			"id": "1ea5bfbe-09c7-40e3-9f64-62cf4a14e162"
 		},
 		{
-			"name": "Submission",
+			"name": "Admin",
 			"item": [
 				{
-					"name": "Create Submission",
-					"id": "910aee89-e96c-4765-ab2b-a383d6abed7d",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Cookie",
-								"value": "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVfYXQiOjE2NzA4MDczNzEsImlzc3VlZF9hdCI6MTY3MDU5MTM3MSwiaXNzdWVyIjoicGVtaW5qYW1hbi1ydWFuZ2FuIiwicm9sZV9pZCI6Miwicm9sZV9uYW1lIjoidXNlciIsInVzZXJuYW1lIjoiYXJpZWJyYWlud2FyZSJ9.M45bVQDURIZCu42Tm69MhiyLv0F1WwdVXNkzQEujBUk",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"room_id\": 1,\n    \"room_number\": \"B303\",\n    \"remark\": \"Untuk acara MUBES Himpunan\",\n    \"start_use_date\": \"2023-01-05\",\n    \"end_use_date\": \"2023-01-06\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "Submission",
+					"item": [
+						{
+							"name": "Admin List Submission",
+							"id": "96d61ce2-1f8a-4486-af3b-3b11ad61d21a",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVfYXQiOjE2NzEyNTg0NTksImlzc3VlZF9hdCI6MTY3MTA0MjQ0MSwiaXNzdWVyIjoicGVtaW5qYW1hbi1ydWFuZ2FuIiwicm9sZV9pZCI6MSwicm9sZV9uYW1lIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFyaWVicmFpbndhcmUifQ.zepEuPEEXijk0emnGStQwD6TFs9RffA--p41gWDwcAg",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/admin/submission/list",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"admin",
+										"submission",
+										"list"
+									]
 								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/user/submission/create",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"user",
-								"submission",
-								"create"
-							]
+							},
+							"response": []
 						}
-					},
-					"response": []
+					],
+					"id": "160ea2d1-133f-482f-8d1d-c7a7a6dde0e8"
 				},
 				{
-					"name": "List Submission",
-					"id": "f7abaffb-defd-4291-aadc-fc573b54a2a1",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Cookie",
-								"value": "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVfYXQiOjE2NzA4MDczNzEsImlzc3VlZF9hdCI6MTY3MDU5MTM3MSwiaXNzdWVyIjoicGVtaW5qYW1hbi1ydWFuZ2FuIiwicm9sZV9pZCI6Miwicm9sZV9uYW1lIjoidXNlciIsInVzZXJuYW1lIjoiYXJpZWJyYWlud2FyZSJ9.M45bVQDURIZCu42Tm69MhiyLv0F1WwdVXNkzQEujBUk",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{host}}/user/submission/list?is_approved=false",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"user",
-								"submission",
-								"list"
-							],
-							"query": [
-								{
-									"key": "is_approved",
-									"value": "false",
-									"type": "text"
+					"name": "Room",
+					"item": [
+						{
+							"name": "List Available Room",
+							"id": "8245bb84-6c0e-4002-b593-7a11d57c6453",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
 								}
-							]
+							},
+							"response": []
 						}
-					},
-					"response": []
+					],
+					"id": "f031b163-5344-49ba-be04-e5be8a6d1c43"
 				}
 			],
-			"id": "dfeb1053-0bfc-4e25-9009-10acb0a7f814"
-		},
-		{
-			"name": "Room",
-			"item": [
-				{
-					"name": "List Available Room",
-					"id": "8245bb84-6c0e-4002-b593-7a11d57c6453",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": ""
-						}
-					},
-					"response": []
-				}
-			],
-			"id": "f049e3d2-7153-4518-ab36-4b55f7e2320c"
+			"id": "de2f1d1d-01bb-45bf-a15f-36a6060839f6"
 		},
 		{
 			"name": "API Gateway",
@@ -217,6 +231,36 @@
 					"raw": "{{host}}",
 					"host": [
 						"{{host}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"id": "adb5e492-f04e-484a-ac46-90f9c68b93a3",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"ariebrainware\",\n    \"password\":\"anonymous00\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/login",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"login"
 					]
 				}
 			},
