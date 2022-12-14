@@ -1,6 +1,8 @@
 package endpoint
 
 import (
+	"fmt"
+
 	"github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/external"
 	"github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/model"
 	"github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/util"
@@ -50,6 +52,14 @@ func SubmissionCreate(c *gin.Context) {
 		util.CallUserError(c, "invalid request", err)
 		return
 	}
+
+	if request.RoomID == 0 || request.RoomNumber == "" || request.Remark == "" || request.StartUseDate == "" || request.EndUseDate == "" {
+		err = fmt.Errorf("username and password field cannot be empty")
+		log.Error(err)
+		util.CallUserError(c, "invalid request", err)
+		return
+	}
+
 	db, err := external.GetPostgresClient()
 	if err != nil {
 		log.Error(err)
