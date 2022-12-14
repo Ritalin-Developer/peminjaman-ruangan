@@ -8,6 +8,10 @@ import (
 	"time"
 
 	"github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/config"
+	"github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/endpoint"
+	adminEndpoint "github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/endpoint/admin"
+	userEndpoint "github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/endpoint/user"
+	"github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/middleware"
 	"github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/model"
 	"github.com/getsentry/sentry-go"
 	"github.com/gin-contrib/cors"
@@ -56,6 +60,40 @@ func main() {
 			Data:    nil,
 		})
 	})
+	r.POST("/login", endpoint.Login)
+
+	// Admin Endpoint
+	admin := r.Group("/admin")
+	admin.PUT("/info/update", adminEndpoint.AdminChangeInfo)
+
+	adminSubmission := admin.Group("/submission")
+	adminSubmission.Use(middleware.MiddlewareValidateToken)
+	adminSubmission.Use(middleware.ValidateRoleAccess)
+	adminSubmission.GET("/list", adminEndpoint.SubmissionList)
+	adminSubmission.POST("/approve", adminEndpoint.SubmissionApprove)
+	adminSubmission.POST("/reject", adminEndpoint.SubmissionReject)
+
+	adminRoom := admin.Group("/room")
+	adminRoom.Use(middleware.ValidateRoleAccess)
+	adminRoom.POST("/register", adminEndpoint.RegisterRoom)
+	adminRoom.POST("/list", adminEndpoint.ListRoom)
+
+	// User Endpoint
+	user := r.Group("/user")
+	user.POST("/register", userEndpoint.Register)
+	user.PUT("/info/update", userEndpoint.UserChangeInfo)
+	user.GET("/token/validate", userEndpoint.UserValidateToken)
+
+	userSubmission := user.Group("/submission")
+	userSubmission.Use(middleware.MiddlewareValidateToken)
+	userSubmission.POST("/create", userEndpoint.SubmissionCreate)
+	userSubmission.PUT("/update", userEndpoint.SubmissionUpdate)
+	userSubmission.DELETE("/delete", userEndpoint.SubmissionDelete)
+	userSubmission.GET("/list", userEndpoint.SubmissionList)
+
+	userRoom := user.Group("/room")
+	userRoom.Use(middleware.MiddlewareValidateToken)
+	userRoom.GET("/list", userEndpoint.UserRoomList)
 
 	port, _ := strconv.Atoi(config.Port)
 	log.Infof("Service version: %s", config.Version)

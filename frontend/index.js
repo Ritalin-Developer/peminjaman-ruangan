@@ -1,9 +1,10 @@
-const BACKEND_URL = "https://peminjamanruangan.rtln.xyz"
+// const BACKEND_URL = "https://peminjamanruangan.rtln.xyz"
+const BACKEND_URL = "http://localhost:1118"
 
 const btnRegister = $("#btn-register")
-const txtUsername = $("#txt-username")
-const txtPassword = $("#txt-password")
-const txtRealName = $("#txt-realname")
+const txtUsername = $("#txt-username").val()
+const txtPassword = $("#txt-password").val()
+const txtRealName = $("#txt-realname").val()
 
 // fetch(`${BACKEND_URL}/`)
 //   .then((Response) => Response.json())
@@ -30,12 +31,16 @@ async function postData(url = '', data = {}) {
 
 $("document").ready(() => {
   console.log("script loaded")
-  btnRegister.click(postData(`${BACKEND_URL}/user/register`, {
-    "username": txtUsername,
-    "password": txtPassword,
-    "real_name": txtRealName,
-  })
-    .then((data) => {
-      console.log(data); // JSON data parsed by `data.json()` call
-    }))
 })
+
+btnRegister.submit(postData(`${BACKEND_URL}/user/register`, {
+  "username": txtUsername,
+  "password": txtPassword,
+  "real_name": txtRealName,
+})
+  .then((data) => {
+    console.log('User register endpoint called')
+    console.log(data); // JSON data parsed by `data.json()` call
+  }))
+
+  

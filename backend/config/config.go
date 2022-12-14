@@ -5,15 +5,20 @@ import (
 )
 
 type Config struct {
-	Version         string `mapstructure:"VERSION"`
-	Port            string `mapstructure:"PORT"`
-	Environment     string `mapstructure:"ENVIRONMENT"`
-	MongoHost       string `mapstructure:"MONGO_HOST"`
-	MongoUser       string `mapstructure:"MONGO_USER"`
-	MongoPassword   string `mapstructure:"MONGO_PASSWORD"`
-	MongoDatabase   string `mapstructure:"MONGO_DATABASE"`
-	MongoCollection string `mapstructure:"MONGO_COLLECTION"`
-	AllowedOrigin   string `mapstructure:"ALLOWERD_ORIGIN"`
+	Version          string `mapstructure:"VERSION"`
+	Port             string `mapstructure:"PORT"`
+	Environment      string `mapstructure:"ENVIRONMENT"`
+	PostgresHost     string `mapstructure:"POSTGRES_HOST"`
+	PostgresPort     string `mapstructure:"POSTGRES_PORT"`
+	PostgresUser     string `mapstructure:"POSTGRES_USER"`
+	PostgresPassword string `mapstructure:"POSTGRES_PASSWORD"`
+	PostgresDatabase string `mapstructure:"POSTGRES_DATABASE"`
+	GORMLog          bool   `mapstructure:"GORM_LOG"`
+	PostgresMinConn  int    `mapstructure:"POSTGRES_MIN_CONN"`
+	PostgresMaxConn  int    `mapstructure:"POSTGRES_MAX_CONN"`
+	AllowedOrigin    string `mapstructure:"ALLOWERD_ORIGIN"`
+	SecretKey        string `mapstructure:"SECRET_KEY"`
+	TokenLifetimeMin int    `mapstructure:"TOKEN_LIFETIME_MIN"`
 }
 
 var Conf Config
