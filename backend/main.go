@@ -74,9 +74,12 @@ func main() {
 	adminSubmission.GET("/reject", adminEndpoint.SubmissionReject)
 
 	adminRoom := admin.Group("/room")
+	adminRoom.Use(middleware.MiddlewareValidateToken)
 	adminRoom.Use(middleware.ValidateRoleAccess)
+	adminRoom.GET("/list", adminEndpoint.ListRoom)
 	adminRoom.POST("/register", adminEndpoint.RegisterRoom)
-	adminRoom.POST("/list", adminEndpoint.ListRoom)
+	adminRoom.PUT("/update", adminEndpoint.UpdateRoomInformation)
+	adminRoom.DELETE("/delete", adminEndpoint.DeleteRoom)
 
 	// User Endpoint
 	user := r.Group("/user")

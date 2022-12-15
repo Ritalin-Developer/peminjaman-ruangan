@@ -13,11 +13,13 @@ func ValidateRoleAccess(c *gin.Context) {
 	tokenData, exist := c.Get("data")
 	if !exist {
 		util.MiddlewareCallUserUnauthorized(c, "invalid token data", fmt.Errorf("missing token data"))
+		return
 	}
 	data := &model.TokenUserData{}
 	mapstructure.Decode(tokenData, &data)
 	if data.RoleName != "admin" {
 		util.MiddlewareCallUserUnauthorized(c, "invalid token data", fmt.Errorf("you are not an admin"))
+		return
 	}
 	c.Next()
 }

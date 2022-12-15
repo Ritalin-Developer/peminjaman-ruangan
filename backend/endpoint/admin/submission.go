@@ -7,6 +7,7 @@ import (
 	"github.com/getsentry/sentry-go"
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
+	"gorm.io/gorm"
 )
 
 func SubmissionList(c *gin.Context) {
@@ -40,8 +41,11 @@ func SubmissionApprove(c *gin.Context) {
 		util.CallServerError(c, "something wrong, please try again later", err)
 		return
 	}
+	tx := db.Begin()
+	defer tx.Rollback()
+
 	submission := &model.Submission{}
-	err = db.
+	err = tx.
 		Model(&submission).
 		Where("id = ?", submissionID).
 		Update("is_approved", true).
@@ -51,6 +55,25 @@ func SubmissionApprove(c *gin.Context) {
 		util.CallServerError(c, "something wrong, please try again later", err)
 		return
 	}
+
+	room := &model.Room{}
+	err = tx.
+		Model(&room).
+		Where("id = ?", submission.RoomID).
+		Where("is_available = true").
+		Update("is_available", false).
+		Error
+	if err != nil {
+		if err == gorm.ErrRecordNotFound {
+			util.CallUserError(c, "room doesn't exist", err)
+			return
+		}
+		log.Error(err)
+		sentry.CaptureException(err)
+		util.CallServerError(c, "something wrong, please try again later", err)
+		return
+	}
+	tx.Commit()
 
 	util.CallSuccessOK(c, "success", nil)
 }

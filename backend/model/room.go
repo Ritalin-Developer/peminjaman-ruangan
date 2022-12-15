@@ -7,6 +7,7 @@ type Room struct {
 	IsAvailable bool      `gorm:"column:is_available" json:"is_available"`
 	RoomNumber  string    `gorm:"column:room_number" json:"room_number"`
 	Remark      string    `gorm:"column:remark" json:"remark"`
+	Capacity    uint      `gorm:"column:capacity" json:"capacity"`
 	CreatedAt   time.Time `gorm:"column:created_at;" json:"created_at"`
 	UpdatedAt   time.Time `gorm:"column:updated_at;" json:"updated_at"`
 }
