@@ -23,13 +23,13 @@
 								"header": [
 									{
 										"key": "Cookie",
-										"value": "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVfYXQiOjE2NzA4MDczNzEsImlzc3VlZF9hdCI6MTY3MDU5MTM3MSwiaXNzdWVyIjoicGVtaW5qYW1hbi1ydWFuZ2FuIiwicm9sZV9pZCI6Miwicm9sZV9uYW1lIjoidXNlciIsInVzZXJuYW1lIjoiYXJpZWJyYWlud2FyZSJ9.M45bVQDURIZCu42Tm69MhiyLv0F1WwdVXNkzQEujBUk",
+										"value": "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVfYXQiOjE2NzEzMTA4NDEsImlzc3VlZF9hdCI6MTY3MTA5NDgzNiwiaXNzdWVyIjoicGVtaW5qYW1hbi1ydWFuZ2FuIiwicm9sZV9pZCI6Miwicm9sZV9uYW1lIjoidXNlciIsInVzZXJuYW1lIjoicHJpdGFtaXNlcmdpbyJ9.agRfIyhXhwDIAPegvgzExjmCxgMEUq5bOCiY-9R0OCg",
 										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"room_id\": 1,\n    \"room_number\": \"B303\",\n    \"remark\": \"Untuk acara MUBES Himpunan\",\n    \"start_use_date\": \"2023-01-05\",\n    \"end_use_date\": \"2023-01-06\"\n}",
+									"raw": "{\n    \"room_id\": 1,\n    \"room_number\": \"B314\",\n    \"remark\": \"Untuk acara Mabar HMTI\",\n    \"start_use_date\": \"2023-02-26\",\n    \"end_use_date\": \"2023-02-29\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -61,12 +61,12 @@
 								"header": [
 									{
 										"key": "Cookie",
-										"value": "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVfYXQiOjE2NzA4MDczNzEsImlzc3VlZF9hdCI6MTY3MDU5MTM3MSwiaXNzdWVyIjoicGVtaW5qYW1hbi1ydWFuZ2FuIiwicm9sZV9pZCI6Miwicm9sZV9uYW1lIjoidXNlciIsInVzZXJuYW1lIjoiYXJpZWJyYWlud2FyZSJ9.M45bVQDURIZCu42Tm69MhiyLv0F1WwdVXNkzQEujBUk",
+										"value": "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVfYXQiOjE2NzEzMTA4NDEsImlzc3VlZF9hdCI6MTY3MTA5NDgzNiwiaXNzdWVyIjoicGVtaW5qYW1hbi1ydWFuZ2FuIiwicm9sZV9pZCI6Miwicm9sZV9uYW1lIjoidXNlciIsInVzZXJuYW1lIjoicHJpdGFtaXNlcmdpbyJ9.agRfIyhXhwDIAPegvgzExjmCxgMEUq5bOCiY-9R0OCg",
 										"type": "text"
 									}
 								],
 								"url": {
-									"raw": "{{host}}/user/submission/list?is_approved=false",
+									"raw": "{{host}}/user/submission/list?limit=10",
 									"host": [
 										"{{host}}"
 									],
@@ -77,8 +77,8 @@
 									],
 									"query": [
 										{
-											"key": "is_approved",
-											"value": "false"
+											"key": "limit",
+											"value": "10"
 										}
 									]
 								}
