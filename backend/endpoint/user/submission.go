@@ -2,6 +2,7 @@ package endpoint
 
 import (
 	"fmt"
+	"strconv"
 
 	"github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/external"
 	"github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/model"
@@ -12,7 +13,15 @@ import (
 )
 
 func SubmissionList(c *gin.Context) {
-	isApproved := c.Query("is_approved")
+	// TODO: Implement search by query/filter
+	_limit := c.Query("limit")
+	limit, err := strconv.Atoi(_limit)
+	if err != nil {
+		log.Error(err)
+		sentry.CaptureException(err)
+		util.CallUserError(c, "must provide limit query", err)
+		return
+	}
 
 	db, err := external.GetPostgresClient()
 	if err != nil {
@@ -21,18 +30,18 @@ func SubmissionList(c *gin.Context) {
 		util.CallServerError(c, "something wrong, please try again later", err)
 		return
 	}
-	submission := []*model.Submission{}
+	submissions := []*model.Submission{}
 	err = db.
-		Model(&submission).
-		Where("is_approved = ?", isApproved).
-		Find(&submission).
+		Model(&submissions).
+		Limit(limit).
+		Find(&submissions).
 		Error
 	if err != nil {
 		log.Error(err)
 		util.CallServerError(c, "something wrong, please try again later", err)
 		return
 	}
-	util.CallSuccessOK(c, "success", nil)
+	util.CallSuccessOK(c, "success", submissions)
 }
 
 type submissionCreateRequest struct {

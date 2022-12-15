@@ -86,10 +86,10 @@ func main() {
 
 	userSubmission := user.Group("/submission")
 	userSubmission.Use(middleware.MiddlewareValidateToken)
+	userSubmission.GET("/list", userEndpoint.SubmissionList)
 	userSubmission.POST("/create", userEndpoint.SubmissionCreate)
 	userSubmission.PUT("/update", userEndpoint.SubmissionUpdate)
 	userSubmission.DELETE("/delete", userEndpoint.SubmissionDelete)
-	userSubmission.GET("/list", userEndpoint.SubmissionList)
 
 	userRoom := user.Group("/room")
 	userRoom.Use(middleware.MiddlewareValidateToken)
