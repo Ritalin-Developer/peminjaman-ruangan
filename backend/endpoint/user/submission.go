@@ -45,7 +45,7 @@ func SubmissionList(c *gin.Context) {
 	util.CallSuccessOK(c, "success", submissions)
 }
 
-type submissionCreateRequest struct {
+type submissionRequest struct {
 	RoomID       uint64 `json:"room_id"`
 	RoomNumber   string `json:"room_number"`
 	Remark       string `json:"remark"`
@@ -54,7 +54,7 @@ type submissionCreateRequest struct {
 }
 
 func SubmissionCreate(c *gin.Context) {
-	request := &submissionCreateRequest{}
+	request := &submissionRequest{}
 	err := c.BindJSON(&request)
 	if err != nil {
 		log.Error(err)
@@ -121,9 +121,86 @@ func SubmissionCreate(c *gin.Context) {
 }
 
 func SubmissionUpdate(c *gin.Context) {
+	submissionID := c.Query("submission_id")
+	request := &submissionRequest{}
+	err := c.BindJSON(&request)
+	if err != nil {
+		log.Error(err)
+		sentry.CaptureException(err)
+		util.CallUserError(c, "invalid request", err)
+		return
+	}
+	if submissionID == "" || request.RoomID == 0 || request.RoomNumber == "" || request.Remark == "" || request.StartUseDate == "" || request.EndUseDate == "" {
+		err = fmt.Errorf("submission_id, room_id, room_number, remark, start_use_date, end_use_date field cannot be empty")
+		log.Error(err)
+		util.CallUserError(c, "invalid request", err)
+		return
+	}
+
+	db, err := external.GetPostgresClient()
+	if err != nil {
+		log.Error(err)
+		sentry.CaptureException(err)
+		util.CallServerError(c, "something wrong, please try again later", err)
+		return
+	}
+	submission := &model.Submission{}
+	err = db.
+		Model(&submission).
+		Where("id = ?", submissionID).
+		Updates(map[string]interface{}{
+			"room_id":        request.RoomID,
+			"room_number":    request.RoomNumber,
+			"remark":         request.Remark,
+			"start_use_date": request.StartUseDate,
+			"end_use_date":   request.EndUseDate,
+		}).
+		Error
+	if err != nil {
+		if err == gorm.ErrRecordNotFound {
+			util.CallUserError(c, "room doesn't exist", err)
+			return
+		}
+		log.Error(err)
+		sentry.CaptureException(err)
+		util.CallServerError(c, "something wrong, please try again later", err)
+		return
+	}
+
 	util.CallSuccessOK(c, "success", nil)
 }
 
 func SubmissionDelete(c *gin.Context) {
+	submissionID := c.Query("submission_id")
+	if submissionID == "" {
+		err := fmt.Errorf("submission_id field cannot be empty")
+		log.Error(err)
+		util.CallUserError(c, "invalid request", err)
+		return
+	}
+
+	db, err := external.GetPostgresClient()
+	if err != nil {
+		log.Error(err)
+		sentry.CaptureException(err)
+		util.CallServerError(c, "something wrong, please try again later", err)
+		return
+	}
+	submission := &model.Submission{}
+	err = db.
+		Where("id = ?", submissionID).
+		Delete(&submission).
+		Error
+	if err != nil {
+		if err == gorm.ErrRecordNotFound {
+			util.CallUserError(c, "room doesn't exist", err)
+			return
+		}
+		log.Error(err)
+		sentry.CaptureException(err)
+		util.CallServerError(c, "something wrong, please try again later", err)
+		return
+	}
+
 	util.CallSuccessOK(c, "success", nil)
 }
