@@ -2,13 +2,16 @@ package external
 
 import (
 	"fmt"
+	"log"
 	"os"
+	"time"
 
 	"github.com/ITEBARPLKelompok3/peminjaman-ruangan/backend/config"
 	"github.com/getsentry/sentry-go"
-	log "github.com/sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 )
 
 // Postgres is a struct to represent postgresql connection requirement
@@ -31,7 +34,7 @@ func (p *Postgres) GetConn() (db *gorm.DB, err error) {
 	// config, err := config.LoadConfig(".")
 	// // handle errors
 	// if err != nil {
-	// 	log.Fatalf("can't load environment app.env: %v", err)
+	// 	logrus.Fatalf("can't load environment app.env: %v", err)
 	// }
 
 	connString := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=disable timezone=Asia/Jakarta",
@@ -46,15 +49,23 @@ func (p *Postgres) GetConn() (db *gorm.DB, err error) {
 	if p.AppName != "" {
 		connString = fmt.Sprintf("%s application_name=%s", connString, p.AppName)
 	}
-	db, err = gorm.Open(postgres.Open(connString))
+	newLogger := logger.New(
+		log.New(os.Stdout, "\r\n", log.LstdFlags), // io writer
+		logger.Config{
+			SlowThreshold:             time.Second, // Slow SQL threshold
+			LogLevel:                  logger.Info, // Log level
+			IgnoreRecordNotFoundError: true,        // Ignore ErrRecordNotFound error for logger
+			Colorful:                  false,       // Disable color
+		},
+	)
+	db, err = gorm.Open(postgres.Open(connString), &gorm.Config{
+		Logger: newLogger,
+	})
 	if err != nil {
 		sentry.CaptureException(err)
-		log.Error(err)
+		logrus.Error(err)
 		return
 	}
-	// db.(config.GORMLog)
-	// db.DB().SetMaxIdleConns(config.PostgresMinConn)
-	// db.DB().SetMaxOpenConns(config.PostgresMaxConn)
 	return
 }
 
@@ -64,7 +75,7 @@ func GetPostgresClient() (db *gorm.DB, err error) {
 	config, err := config.LoadConfig(".")
 	// handle errors
 	if err != nil {
-		log.Fatalf("can't load environment app.env: %v", err)
+		logrus.Fatalf("can't load environment app.env: %v", err)
 	}
 
 	appName := os.Getenv("APP_NAME")
@@ -82,7 +93,7 @@ func GetPostgresClient() (db *gorm.DB, err error) {
 	db, err = connection.GetConn()
 	if err != nil {
 		sentry.CaptureException(err)
-		log.Error(err)
+		logrus.Error(err)
 		return
 	}
 	if db == nil {
