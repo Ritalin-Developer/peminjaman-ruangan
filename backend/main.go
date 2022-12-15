@@ -70,8 +70,8 @@ func main() {
 	adminSubmission.Use(middleware.MiddlewareValidateToken)
 	adminSubmission.Use(middleware.ValidateRoleAccess)
 	adminSubmission.GET("/list", adminEndpoint.SubmissionList)
-	adminSubmission.POST("/approve", adminEndpoint.SubmissionApprove)
-	adminSubmission.POST("/reject", adminEndpoint.SubmissionReject)
+	adminSubmission.GET("/approve", adminEndpoint.SubmissionApprove)
+	adminSubmission.GET("/reject", adminEndpoint.SubmissionReject)
 
 	adminRoom := admin.Group("/room")
 	adminRoom.Use(middleware.ValidateRoleAccess)
