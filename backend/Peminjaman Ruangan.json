@@ -269,16 +269,163 @@
 					"name": "Room",
 					"item": [
 						{
-							"name": "List Available Room",
+							"name": "Admin List Room",
 							"id": "8245bb84-6c0e-4002-b593-7a11d57c6453",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
 							"request": {
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVfYXQiOjE2NzEyNTg0NTksImlzc3VlZF9hdCI6MTY3MTA0MjQ0MSwiaXNzdWVyIjoicGVtaW5qYW1hbi1ydWFuZ2FuIiwicm9sZV9pZCI6MSwicm9sZV9uYW1lIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFyaWVicmFpbndhcmUifQ.zepEuPEEXijk0emnGStQwD6TFs9RffA--p41gWDwcAg",
+										"type": "text"
+									}
+								],
 								"url": {
-									"raw": ""
+									"raw": "{{host}}/admin/room/list?limit=10",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"admin",
+										"room",
+										"list"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin Room Register",
+							"id": "c51d5344-3975-41b9-9b85-bb037c3d10a1",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVfYXQiOjE2NzEyNTg0NTksImlzc3VlZF9hdCI6MTY3MTA0MjQ0MSwiaXNzdWVyIjoicGVtaW5qYW1hbi1ydWFuZ2FuIiwicm9sZV9pZCI6MSwicm9sZV9uYW1lIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFyaWVicmFpbndhcmUifQ.zepEuPEEXijk0emnGStQwD6TFs9RffA--p41gWDwcAg",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"remark\":\"Standard room suits for class big meeting. Have some features like projector, white board, WiFi, and air conditioner\",\n    \"room_number\":\"B315\",\n    \"is_available\":false,\n    \"capacity\":25\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/admin/room/register",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"admin",
+										"room",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin Update Room Information",
+							"id": "43d2fe95-291e-4a00-83eb-fa0c85716712",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVfYXQiOjE2NzEyNTg0NTksImlzc3VlZF9hdCI6MTY3MTA0MjQ0MSwiaXNzdWVyIjoicGVtaW5qYW1hbi1ydWFuZ2FuIiwicm9sZV9pZCI6MSwicm9sZV9uYW1lIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFyaWVicmFpbndhcmUifQ.zepEuPEEXijk0emnGStQwD6TFs9RffA--p41gWDwcAg",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"remark\":\"Standard room suits for class big meeting. Have some features like projector, white board, WiFi, and air conditioner\",\n    \"room_number\":\"B315\",\n    \"is_available\":true,\n    \"capacity\":30\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/admin/room/update?room_id=3",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"admin",
+										"room",
+										"update"
+									],
+									"query": [
+										{
+											"key": "room_id",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin Delete Room",
+							"id": "13de61cf-644e-4b03-a3f7-2bd0b907d198",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVfYXQiOjE2NzEyNTg0NTksImlzc3VlZF9hdCI6MTY3MTA0MjQ0MSwiaXNzdWVyIjoicGVtaW5qYW1hbi1ydWFuZ2FuIiwicm9sZV9pZCI6MSwicm9sZV9uYW1lIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFyaWVicmFpbndhcmUifQ.zepEuPEEXijk0emnGStQwD6TFs9RffA--p41gWDwcAg",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"remark\":\"Standard room suits for class big meeting. Have some features like projector, white board, WiFi, and air conditioner\",\n    \"room_number\":\"B315\",\n    \"is_available\":true,\n    \"capacity\":30\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/admin/room/delete?room_id=4",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"admin",
+										"room",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "room_id",
+											"value": "4",
+											"type": "text"
+										}
+									]
 								}
 							},
 							"response": []
