@@ -190,6 +190,77 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Admin Submission Approve",
+							"id": "8f416a95-e5d6-4ef7-9bd9-f5dee86a3db1",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVfYXQiOjE2NzEyNTg0NTksImlzc3VlZF9hdCI6MTY3MTA0MjQ0MSwiaXNzdWVyIjoicGVtaW5qYW1hbi1ydWFuZ2FuIiwicm9sZV9pZCI6MSwicm9sZV9uYW1lIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFyaWVicmFpbndhcmUifQ.zepEuPEEXijk0emnGStQwD6TFs9RffA--p41gWDwcAg",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/admin/submission/approve?submission_id=2",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"admin",
+										"submission",
+										"approve"
+									],
+									"query": [
+										{
+											"key": "submission_id",
+											"value": "2",
+											"type": "text"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin Submission Reject",
+							"id": "5ae7ee91-768e-4b58-ad03-e571422d49a6",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVfYXQiOjE2NzEyNTg0NTksImlzc3VlZF9hdCI6MTY3MTA0MjQ0MSwiaXNzdWVyIjoicGVtaW5qYW1hbi1ydWFuZ2FuIiwicm9sZV9pZCI6MSwicm9sZV9uYW1lIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFyaWVicmFpbndhcmUifQ.zepEuPEEXijk0emnGStQwD6TFs9RffA--p41gWDwcAg",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/admin/submission/reject?submission_id=2",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"admin",
+										"submission",
+										"reject"
+									],
+									"query": [
+										{
+											"key": "submission_id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"id": "160ea2d1-133f-482f-8d1d-c7a7a6dde0e8"
