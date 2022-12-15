@@ -10,6 +10,7 @@ import (
 	"github.com/getsentry/sentry-go"
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
+	"gorm.io/gorm"
 )
 
 func SubmissionList(c *gin.Context) {
@@ -74,6 +75,28 @@ func SubmissionCreate(c *gin.Context) {
 		log.Error(err)
 		sentry.CaptureException(err)
 		util.CallServerError(c, "something wrong, please try again later", err)
+		return
+	}
+
+	room := &model.Room{}
+	err = db.
+		Model(&room).
+		Where("id = ?", request.RoomID).
+		First(&room).
+		Error
+	if err != nil {
+		if err == gorm.ErrRecordNotFound {
+			util.CallUserError(c, "room doesn't exist", err)
+			return
+		}
+		log.Error(err)
+		sentry.CaptureException(err)
+		util.CallServerError(c, "something wrong, please try again later", err)
+		return
+	}
+	if !room.IsAvailable {
+		err = fmt.Errorf("room is not available")
+		util.CallUserError(c, "make sure to check list room available", err)
 		return
 	}
 
