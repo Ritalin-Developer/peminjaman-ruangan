@@ -70,6 +70,8 @@ TOKEN_LIFETIME_MIN=3600
 4. Jalankan syntax 
 
 ```sh
+cd backend/migration/bin
+cp ../../app.env . && ./backend-migration
 docker compose build && docker compose up -d && docker compose ps -a
 ```
 
