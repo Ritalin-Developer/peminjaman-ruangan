@@ -13,6 +13,41 @@
 					"name": "Submission",
 					"item": [
 						{
+							"name": "User List Submission",
+							"id": "f7abaffb-defd-4291-aadc-fc573b54a2a1",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVfYXQiOjE2NzEzMTA4NDEsImlzc3VlZF9hdCI6MTY3MTA5NDgzNiwiaXNzdWVyIjoicGVtaW5qYW1hbi1ydWFuZ2FuIiwicm9sZV9pZCI6Miwicm9sZV9uYW1lIjoidXNlciIsInVzZXJuYW1lIjoicHJpdGFtaXNlcmdpbyJ9.agRfIyhXhwDIAPegvgzExjmCxgMEUq5bOCiY-9R0OCg",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/user/submission/list?limit=10",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"user",
+										"submission",
+										"list"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "User Create Submission",
 							"id": "910aee89-e96c-4765-ab2b-a383d6abed7d",
 							"protocolProfileBehavior": {
@@ -51,13 +86,57 @@
 							"response": []
 						},
 						{
-							"name": "User List Submission",
-							"id": "f7abaffb-defd-4291-aadc-fc573b54a2a1",
+							"name": "User Update Submission",
+							"id": "fa14077d-6e7b-4ddb-8825-de88a519d3bb",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
 							"request": {
-								"method": "GET",
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVfYXQiOjE2NzEzMTA4NDEsImlzc3VlZF9hdCI6MTY3MTA5NDgzNiwiaXNzdWVyIjoicGVtaW5qYW1hbi1ydWFuZ2FuIiwicm9sZV9pZCI6Miwicm9sZV9uYW1lIjoidXNlciIsInVzZXJuYW1lIjoicHJpdGFtaXNlcmdpbyJ9.agRfIyhXhwDIAPegvgzExjmCxgMEUq5bOCiY-9R0OCg",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"room_id\": 1,\n    \"room_number\": \"B314\",\n    \"remark\": \"Untuk acara Mabar HMTI\",\n    \"start_use_date\": \"2023-02-26\",\n    \"end_use_date\": \"2023-02-29\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/user/submission/create?submission_id=2",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"user",
+										"submission",
+										"create"
+									],
+									"query": [
+										{
+											"key": "submission_id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "User Delete Submission",
+							"id": "99695036-078e-4095-aee7-a214796b2cbf",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
 								"header": [
 									{
 										"key": "Cookie",
@@ -66,13 +145,55 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/user/submission/list?limit=10",
+									"raw": "{{host}}/user/submission/create?submission_id=2",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"user",
 										"submission",
+										"create"
+									],
+									"query": [
+										{
+											"key": "submission_id",
+											"value": "2",
+											"type": "text"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "dfeb1053-0bfc-4e25-9009-10acb0a7f814"
+				},
+				{
+					"name": "Room",
+					"item": [
+						{
+							"name": "User List Room",
+							"id": "434a68e0-5ff5-46ef-8b53-cfeed369e0c0",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVfYXQiOjE2NzEyNTg0NTksImlzc3VlZF9hdCI6MTY3MTA0MjQ0MSwiaXNzdWVyIjoicGVtaW5qYW1hbi1ydWFuZ2FuIiwicm9sZV9pZCI6MSwicm9sZV9uYW1lIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFyaWVicmFpbndhcmUifQ.zepEuPEEXijk0emnGStQwD6TFs9RffA--p41gWDwcAg",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/user/room/list?limit=10",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"user",
+										"room",
 										"list"
 									],
 									"query": [
@@ -86,11 +207,6 @@
 							"response": []
 						}
 					],
-					"id": "dfeb1053-0bfc-4e25-9009-10acb0a7f814"
-				},
-				{
-					"name": "Room",
-					"item": [],
 					"id": "3aa5feb9-a062-4369-a6fc-7e18704782d5"
 				},
 				{
