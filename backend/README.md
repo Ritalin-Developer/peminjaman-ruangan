@@ -3,7 +3,7 @@
 ![Go version](https://img.shields.io/badge/Go-v1.19-lightblue)
 ![Docker version](https://img.shields.io/badge/docker--version-20.10.21-blue)
 
-Service atau layanan ini akan mengurus logic dan Database storage untuk aplikasi Peminjaman Ruangan. Berperan sebagai API Gateway yang menyediakan endpoint-endpoint yang dapat FrontEnd gunakan. 
+Service atau layanan ini akan menangani logic dan Database storage untuk aplikasi Peminjaman Ruangan. Berperan sebagai API Gateway yang menyediakan endpoint-endpoint yang dapat FrontEnd gunakan. 
 
 ## API Documentation
 
